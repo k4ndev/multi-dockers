@@ -16,9 +16,9 @@ after_success:
 
    #push docker hub 
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push kamranmirzeyev/multi-client
-    - docker push kamranmirzeyev/multi-nginx
-    - docker push kamranmirzeyev/multi-server
-    - docker push kamranmirzeyev/multi-worker
+    - docker push kamran1/multi-client
+    - docker push kamran1/multi-nginx
+    - docker push kamran1/multi-server
+    - docker push kamran1/multi-worker
     
 language: generic
