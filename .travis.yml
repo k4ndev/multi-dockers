@@ -1,0 +1,24 @@
+sude: required
+services:
+    - docker
+
+before_install:
+    - docker build -t kamranmirzeyev/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true kamranmirzeyev/react-test npm test
+
+after_success:
+   - docker build -t kamranmirzeyev/multi-client ./client
+   - docker build -t kamranmirzeyev/multi-nginx ./nginx
+   - docker build -t kamranmirzeyev/multi-server ./server
+   - docker build -t kamranmirzeyev/multi-worker ./worker
+
+   #push docker hub and build docker 
+    - echo "$DOCKER_PASSWORD" |  docker login -u  "$DOCKER_ID" --password-stdin
+    - docker push kamranmirzeyev/multi-client
+    - docker push kamranmirzeyev/multi-nginx
+    - docker push kamranmirzeyev/multi-server
+    - docker push kamranmirzeyev/multi-worker
+    
+language: generic
