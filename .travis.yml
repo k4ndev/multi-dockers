@@ -1,4 +1,5 @@
 sude: required
+language: generic
 services:
     - docker
 
@@ -21,4 +22,3 @@ after_success:
     - docker push kamran1/multi-server
     - docker push kamran1/multi-worker
     
-language: generic
